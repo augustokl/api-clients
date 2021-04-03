@@ -9,16 +9,16 @@ class ClientSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def validate(self, data):
-        if not valid_number(data['cpf'], 11):
+        if not valid_cpf(data['cpf']):
             raise serializers.ValidationError(
-                {'cpf': 'CPF precisa ter 11 digitos'})
+                {'cpf': 'CPF inválido'})
         if not valid_number(data['rg'], 9):
             raise serializers.ValidationError(
-                {'rg': 'CPF precisa ter 11 digitos'})
-        if not valid_number(data['celphone'], 9):
+                {'rg': 'RG precisa ter 9 digitos'})
+        if not valid_celphone(data['celphone']):
             raise serializers.ValidationError(
-                {'celphone': 'Celular precisa ter 11 digitos'})
-        if not valid_number(data['name'], 9):
+                {'celphone': 'Celular precisa ter 11 digitos e o padrão: 00 00000-0000'})
+        if not valid_string(data['name']):
             raise serializers.ValidationError(
                 {'name': 'Não incluca números'})
 
